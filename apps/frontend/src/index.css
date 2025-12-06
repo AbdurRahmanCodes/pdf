@@ -1,15 +1,21 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+/* CSS Reset and Base Styles */
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap");
+
+/* Tailwind CSS */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+  font-family: "Inconsolata", "Inter", system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.6;
   font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -17,56 +23,262 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+/* Light Theme Variables */
+/* Light Theme Variables */
+:root,
+.light {
+  /* Core Colors */
+  --primary-color: #0284c7; /* Sky 600 */
+  --primary-dark: #0369a1;  /* Sky 700 */
+  --primary-light: #38bdf8; /* Sky 400 */
+
+  --text-primary: #0f172a;   /* Slate 900 */
+  --text-secondary: #475569; /* Slate 600 */
+  --text-muted: #94a3b8;     /* Slate 400 */
+
+  --bg-primary: #f8fafc;    /* Slate 50 */
+  --bg-secondary: #ffffff;  /* White */
+  --bg-tertiary: #f1f5f9;   /* Slate 100 */
+
+  --navbar-bg: rgba(255, 255, 255, 0.8);
+  --card-bg: #ffffff;
+  --section-bg: #f8fafc;
+
+  --border-color: #e2e8f0;
+  --sidebar-border: #cbd5e1;
+
+  --button-bg: #ffffff;
+  --button-hover-bg: #f1f5f9;
+
+  --primary-gradient: linear-gradient(135deg, #0284c7, #0369a1);
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-neon: 0 0 0 rgba(0,0,0,0); /* No neon in light mode usually, or subtle */
+  
+  /* Component gradients and accents (light) */
+  --title-gradient: linear-gradient(135deg, #0f172a 0%, #334155 100%);
+  --panel-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); 
+  
+  --focus-ring: 0 0 0 3px rgba(2, 132, 199, 0.2);
+  
+  --location-icon-color: #0284c7;
+  
+  --weather-card-gradient: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  --weather-card-text: #0f172a;
+  
+  --earthquake-card-gradient: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+  --no-earthquake-card-gradient: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+  
+  --error-gradient: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+  --error-text-color: #dc2626;
+
+  /* Chart & Data Colors */
+  --growth-positive-color: #16a34a;
+  --growth-negative-color: #dc2626;
+  
+  /* Status Colors */
+  --status-critical: #dc2626;
+  --status-high: #ea580c;
+  --status-medium: #d97706;
+  --status-low: #16a34a;
 }
 
+/* Dark Theme Variables */
+/* Dark Theme Variables */
+.dark,
+[data-theme="dark"] {
+  /* Core Colors - Keeping existing feel but refining */
+  --primary-color: #06b6d4; /* Cyan 500 */
+  --primary-dark: #0891b2;  /* Cyan 600 */
+  --primary-light: #22d3ee; /* Cyan 400 */
+
+  --text-primary: #f1f5f9;  /* Slate 100 */
+  --text-secondary: #94a3b8; /* Slate 400 */
+  --text-muted: #64748b;    /* Slate 500 */
+
+  --bg-primary: #020617;    /* Slate 950 */
+  --bg-secondary: #0f172a;  /* Slate 900 */
+  --bg-tertiary: #1e293b;   /* Slate 800 */
+
+  --navbar-bg: rgba(15, 23, 42, 0.7);
+  --card-bg: #1e293b;
+  --section-bg: #020617;
+
+  --border-color: #334155;
+  --sidebar-border: #334155;
+
+  --button-bg: #1e293b;
+  --button-hover-bg: #334155;
+
+  --primary-gradient: linear-gradient(135deg, #06b6d4, #0891b2);
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+  --shadow-neon: 0 0 10px rgba(6, 182, 212, 0.5), 0 0 20px rgba(6, 182, 212, 0.3);
+  
+  /* Component gradients and accents (dark) */
+  --title-gradient: linear-gradient(135deg, #22d3ee 0%, #67e8f9 100%);
+  --panel-shadow: -2px 0 12px rgba(0, 0, 0, 0.4);
+  
+  --focus-ring: 0 0 0 3px rgba(6, 182, 212, 0.2);
+  
+  --location-icon-color: #22d3ee;
+  
+  --weather-card-gradient: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+  --weather-card-text: #f1f5f9;
+  
+  --earthquake-card-gradient: linear-gradient(135deg, #991b1b 0%, #dc2626 100%);
+  --no-earthquake-card-gradient: linear-gradient(135deg, #065f46 0%, #059669 100%);
+  
+  --error-gradient: linear-gradient(135deg, #451a03 0%, #78350f 100%);
+  --error-text-color: #fca5a5;
+
+  /* Chart & Data Colors */
+  --growth-positive-color: #4ade80;
+  --growth-negative-color: #f87171;
+  
+  /* Status Colors */
+  --status-critical: #f43f5e;
+  --status-high: #f97316;
+  --status-medium: #f59e0b;
+  --status-low: #10b981;
+}
+
+/* Severity badge tokens */
+:root,
+.light {
+  --badge-severity-high-bg: #fee2e2;
+  --badge-severity-high-color: #dc2626;
+
+  --badge-severity-medium-bg: #fef3c7;
+  --badge-severity-medium-color: #f59e0b;
+
+  --badge-severity-low-bg: #dbeafe;
+  --badge-severity-low-color: #2563eb;
+}
+
+.dark,
+[data-theme="dark"] {
+  --badge-severity-high-bg: rgba(220, 38, 38, 0.2);
+  --badge-severity-high-color: #fca5a5;
+
+  --badge-severity-medium-bg: rgba(245, 158, 11, 0.2);
+  --badge-severity-medium-color: #fbbf24;
+
+  --badge-severity-low-bg: rgba(37, 99, 235, 0.2);
+  --badge-severity-low-color: #93c5fd;
+}
+
+/* Global Styles */
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
+  padding: 0;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  width: 100%;
   min-height: 100vh;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+html {
+  scroll-behavior: smooth;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: light) {
+/* Premium Scrollbar Styles */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0f172a;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #3b82f6 0%, #2563eb 100%);
+  border-radius: 4px;
+  border: 2px solid #0f172a;
+  transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #60a5fa 0%, #3b82f6 100%);
+  border-color: #1e293b;
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: linear-gradient(180deg, #2563eb 0%, #1d4ed8 100%);
+}
+
+/* Custom scrollbar for specific components */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #1e293b;
+  border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #475569;
+  border-radius: 3px;
+  border: 1px solid #334155;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
+
+/* Smooth scrolling */
+* {
+  scroll-behavior: smooth;
+}
+
+/* Selection styling */
+::selection {
+  background: rgba(59, 130, 246, 0.3);
+  color: #f1f5f9;
+}
+
+@media (max-width: 820px) {
   :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
+    font-size: 13px;
   }
 }
