@@ -1,9 +1,15 @@
 from fastapi import FastAPI
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 from services.scraper import get_flood_data
-# from services.pdf_generator import generate_pdf_report
+from services.chat_engine import chat_engine
 import uvicorn
+
 
 app = FastAPI(title="FloodWatch API", description="Backend for scraping river level data")
 
@@ -27,6 +33,23 @@ def read_flood_data():
     Cached for 1 hour. Scrapes PDF if cache is old.
     """
     return get_flood_data()
+
+@app.get("/api/chat")
+def chat(query: str):
+    """
+    AI Analyst: Searches historical database for query.
+    """
+    response = chat_engine.ask(query)
+    return {"response": response}
+
+@app.get("/api/history-risk")
+def history_risk(location: str):
+    """
+    Returns historical risk context for a location.
+    """
+    risk_summary = chat_engine.get_location_summary(location)
+    return {"risk_analysis": risk_summary}
+
 
 # Temporarily disabled until reportlab is properly installed
 # @app.get("/api/generate-report")
