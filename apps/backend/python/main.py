@@ -1,6 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import StreamingResponse
 from services.scraper import get_flood_data
+# from services.pdf_generator import generate_pdf_report
 import uvicorn
 
 app = FastAPI(title="FloodWatch API", description="Backend for scraping river level data")
@@ -25,6 +27,31 @@ def read_flood_data():
     Cached for 1 hour. Scrapes PDF if cache is old.
     """
     return get_flood_data()
+
+# Temporarily disabled until reportlab is properly installed
+# @app.get("/api/generate-report")
+# def generate_report():
+#     """
+#     Generate comprehensive PDF report with all flood/weather data.
+#     Returns PDF file for download.
+#     """
+#     # Get latest flood data
+#     flood_data = get_flood_data()
+#     
+#     # Generate PDF
+#     pdf_buffer = generate_pdf_report(flood_data)
+#     
+#     # Return as downloadable file
+#     from datetime import datetime
+#     filename = f"NDMA_Alert_Report_{datetime.now().strftime('%Y%m%d_%H%M%S')}.pdf"
+#     
+#     return StreamingResponse(
+#         pdf_buffer,
+#         media_type="application/pdf",
+#         headers={
+#             "Content-Disposition": f"attachment; filename={filename}"
+#         }
+#     )
 
 if __name__ == "__main__":
     uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
